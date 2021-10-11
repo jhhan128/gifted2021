@@ -20,7 +20,7 @@
 
 
 #define TABLE_SZ (509)  // Hash Table size (Should be a prime number)
-#define MAX_KEY_SZ (21) // Max key size + 1
+#define MAX_KEY_SZ (46) // Max key size + 1
 
 
 typedef struct _Node {
