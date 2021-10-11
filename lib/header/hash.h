@@ -1,18 +1,18 @@
 /*
- * lib/hash.h
+ * lib/header/hash.h
  * Created by jhhan128.
  *
  *
  * A Hash Table implementation for gifted2021 project.
  *
  * Just include this header, and you can use hash table without doing anything.
- * DO NOT use Node structure or hash function outside this file.
+ * DO NOT use Node structure or __hash function outside this file.
  * With changing TABLE_SZ and MAX_KEY_SZ, this source can be used in other project.
  *
  */
 
-#ifndef GIFTED2021_HASH_H
-#define GIFTED2021_HASH_H
+#ifndef __HASH__
+#define __HASH__
 
 
 #include <stdlib.h>
@@ -34,7 +34,7 @@ Node *table[TABLE_SZ];  // Hash Table
 
 
 // Hash function
-int hash(const char *str) {
+int __hash(const char *str) {
     int ret = 499;
     const char *pt = str;
 
@@ -74,7 +74,7 @@ void hash_add(const char *key, const int value) {
     add->value = value;
     add->next = NULL;
 
-    const int idx = hash(key);
+    const int idx = __hash(key);
 
     if (table[idx] == NULL) {
         table[idx] = add;
@@ -98,7 +98,7 @@ void hash_add(const char *key, const int value) {
 
 // Delete value for given key if key exist.
 void hash_delete(const char *key) {
-    const int idx = hash(key);
+    const int idx = __hash(key);
     if (table[idx] == NULL) return;
 
     if (strcmp(table[idx]->key, key) == 0) {
@@ -125,7 +125,7 @@ void hash_delete(const char *key) {
 
 // Return value for given key.
 int hash_find(const char *key) {
-    const int idx = hash(key);
+    const int idx = __hash(key);
     Node *cur = table[idx];
 
     while (cur != NULL) {
@@ -140,4 +140,4 @@ int hash_find(const char *key) {
 }
 
 
-#endif // GIFTED2021_HASH_H
+#endif
