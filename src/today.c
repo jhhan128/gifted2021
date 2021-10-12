@@ -33,6 +33,8 @@ static int cmp(const void *first, const void *second) {
 // do work!!
 void run(void) {
     char str[151];
+
+    generateHash();
     outputAll(fopen("lib/output/output1.txt", "r"));
 
     while (true) {
@@ -53,6 +55,16 @@ void run(void) {
     }
 
     qsort(JOBS, JOBSIDX, sizeof(int), cmp);
+
+
+    int size = 0;
+    int *topo = graph_topologicalSort(&size);
+
+    puts("");
+
+    for (int i = 0; i < size; i++) {
+        puts(inTable[topo[i]]);
+    }
 }
 
 

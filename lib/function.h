@@ -1,5 +1,5 @@
 /*
- * lib/header/functions.h
+ * lib/functions.h
  * Created by jhhan128.
  *
  *
@@ -37,8 +37,10 @@ void generateEdge(void);
 
 
 // graphs
-void makeGraph(void);
-void addEdge(int, int);
+void graph_makeGraph(void);
+void graph_addEdge(int, int);
+void graph_dfs(int);
+int *graph_topologicalSort(int *); // parameter - get size of topsort
 
 
 #endif

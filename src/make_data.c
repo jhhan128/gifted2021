@@ -52,6 +52,6 @@ void generateEdge(void) {
 
         if (!isInsideList(a) || !isInsideList(b)) continue;
 
-        addEdge(a, b);
+        graph_addEdge(a, b);
     }
 }
