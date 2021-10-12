@@ -11,15 +11,16 @@
 #include <string.h>
 #include <stdbool.h>
 
+#include "../lib/data_structures/hash/hash.h"
+#include "../lib/function.h"
 
-#include "../lib/header/constants.h"
-#include "../lib/header/hash.h"
-#include "../lib/header/functions.h"
-
+// Counts of important elements.
+int JOBCOUNT = 0;   // Job's count
+int JOBS[151];      // Array of Jobs
+int JOBSIDX = 0;    // Index of JOBS
 
 
 int main(int argc, char **argv) {
-
     FILE *config = fopen("config.txt", "r");
 
     if (config == NULL) {
@@ -27,5 +28,7 @@ int main(int argc, char **argv) {
         return 0;
     }
 
+    
+    run();
     
 }

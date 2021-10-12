@@ -1,37 +1,15 @@
 /*
- * lib/header/hash.h
+ * src/data_structures/hash.c
  * Created by jhhan128.
  *
  *
- * A Hash Table implementation for gifted2021 project.
- *
- * Just include this header, and you can use hash table without doing anything.
- * DO NOT use Node structure or __hash function outside this file.
- * With changing TABLE_SZ and MAX_KEY_SZ, this source can be used in other project.
- *
+ * An implementaion of hash table.
  */
-
-#ifndef __HASH__
-#define __HASH__
-
 
 #include <stdlib.h>
 #include <string.h>
 
-
-#define TABLE_SZ (509)  // Hash Table size (Should be a prime number)
-#define MAX_KEY_SZ (46) // Max key size + 1
-
-
-typedef struct _Node {
-    char key[MAX_KEY_SZ];   // Key
-    int value;              // Value (Should not be negative)
-    struct _Node *next;
-} Node;
-
-
-Node *table[TABLE_SZ];  // Hash Table
-
+#include "hash.h"
 
 // Hash function
 int __hash(const char *str) {
@@ -52,8 +30,8 @@ int __hash(const char *str) {
 // Initialize Hash Table.
 void hash_init(void) {
     for (int i = 0; i < TABLE_SZ; i++) {
-        Node *cur = table[i];
-        Node *tmp;
+        __Node *cur = table[i];
+        __Node *tmp;
 
         while (cur != NULL) {
             tmp = cur;
@@ -62,13 +40,17 @@ void hash_init(void) {
         }
 
         table[i] = NULL;
+
+        for (int j = 0; j < MAX_KEY_SZ; j++) {
+            inTable[i][j] = '\0';
+        }
     }
 }
 
 
 // Add (key, val) to Hash Table.
 void hash_add(const char *key, const int value) {
-    Node *add = (Node*)malloc(sizeof(Node));
+    __Node *add = (__Node*)malloc(sizeof(__Node));
 
     strcpy(add->key, key);
     add->value = value;
@@ -79,7 +61,7 @@ void hash_add(const char *key, const int value) {
     if (table[idx] == NULL) {
         table[idx] = add;
     } else {
-        Node *cur = table[idx];
+        __Node *cur = table[idx];
 
         while (cur != NULL) {
             if (strcmp(cur->key, key) == 0) {
@@ -93,6 +75,8 @@ void hash_add(const char *key, const int value) {
         add->next = table[idx];
         table[idx] = add;
     }
+
+    strcpy(inTable[value], key);
 }
 
 
@@ -102,13 +86,13 @@ void hash_delete(const char *key) {
     if (table[idx] == NULL) return;
 
     if (strcmp(table[idx]->key, key) == 0) {
-        Node *fir = table[idx];
+        __Node *fir = table[idx];
         free(fir);
 
         table[idx] = table[idx]->next;
     } else {
-        Node *cur = table[idx]->next;
-        Node *prev = table[idx];
+        __Node *cur = table[idx]->next;
+        __Node *prev = table[idx];
 
         while (cur != NULL && strcmp(cur->key, key) != 0) {
             prev = cur;
@@ -126,7 +110,7 @@ void hash_delete(const char *key) {
 // Return value for given key.
 int hash_find(const char *key) {
     const int idx = __hash(key);
-    Node *cur = table[idx];
+    __Node *cur = table[idx];
 
     while (cur != NULL) {
         if (strcmp(cur->key, key) == 0) {
@@ -136,8 +120,5 @@ int hash_find(const char *key) {
         cur = cur->next;
     }
 
-    return -1;
+    return NO_SUCH_ELEMENT;
 }
-
-
-#endif

@@ -11,8 +11,10 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "../lib/header/constants.h"
-#include "../lib/header/functions.h"
+#include "../lib/function.h"
+
+
+#define BUFFER_SZ (151)
 
 
 // Get an read-only file pointer, and put whole file to stdout.
