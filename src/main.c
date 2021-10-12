@@ -15,6 +15,7 @@
 #include "../lib/function.h"
 
 // Counts of important elements.
+int JOBCOUNT = 0;   // Count of Jobs
 int JOBS[151];      // Array of Jobs
 int JOBSIDX = 0;    // Index of JOBS
 

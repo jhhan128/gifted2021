@@ -16,7 +16,7 @@
 
 
 extern int JOBCOUNT;
-extern int JOBS;
+extern int *JOBS;
 extern int JOBSIDX;
 
 
