@@ -17,19 +17,15 @@
 #include "../lib/header/functions.h"
 
 
-void outputAll(FILE *filePointer) {
-    char str[BUFFER_SZ];
-
-    while (fgets(str, sizeof(str), filePointer) != NULL) {
-        fputs(str, stdout);
-    }
-
-    puts("");
-}
-
 
 int main(int argc, char **argv) {
-    firstExec(); // segfault -- why???
 
+    FILE *config = fopen("config.txt", "r");
 
+    if (config == NULL) {
+        firstExec();
+        return 0;
+    }
+
+    
 }
