@@ -1,18 +1,25 @@
 /*
- * lib/data_structures/graph/graph.c
+ * lib/data_structures/graph/graph.cpp
  * Created by jhhan128.
  *
  *
  * An implementaion of graph.
  */
 
+#include <cstdio>
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <utility>
+#include <fstream>
+#include <unordered_map>
+#include <vector>
+#include <algorithm>
 
+#include "graph"
 
-#include "graph.h"
-
-
+extern std::vector<int> today;
 bool isInsideList(int);
-
 
 // initialize visited
 void __init_visited(void) {
@@ -42,28 +49,19 @@ void graph_addEdge(int u, int v) {
 // Depth-Fisrt Search
 void graph_dfs(int v) {
     visited[v] = 1;
-    res[idx++] = v;
+    topo_res.push_back(v);
 
     for (int i = 0; i < GRAPH_SIZE; i++) {
-        if (adj[v][i] && !visited[i]) graph_dfs(i);
+        if (adj[v][i] && !visited[i] && isInsideList(i)) graph_dfs(i);
     }
 }
 
 
 // Topological Sort
-int *graph_topologicalSort(int *sz) {
-    int ret[GRAPH_SIZE];
-    int index = 0;
-
-
+std::vector<int> graph_topologicalSort(void) {
     for (int i = 0; i < GRAPH_SIZE; i++) {
-        if (!isInsideList(i)) graph_dfs(i);
+        if (isInsideList(i)) graph_dfs(i);
     }
 
-    for (int i = idx - 1; i >= 0; i--) {
-        ret[index++] = res[i];
-    }
-
-    *sz = index;
-    return ret;
+    return topo_res;
 }

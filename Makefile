@@ -7,6 +7,6 @@
 #
 
 gifted2021:
-	gcc -o gifted2021 src/main.c src/first_exec.c src/make_data.c lib/data_structures/hash/hash.c src/today.c lib/data_structures/graph/graph.c 
+	g++ -std=c++20 -o gifted2021 src/main.cpp src/first_exec.cpp src/make_data.cpp lib/data_structures/hash/hash.cpp src/today.cpp lib/data_structures/graph/graph.cpp 
 clean:
-	rm gifted2021
+	rm gifted2021; rm config.txt

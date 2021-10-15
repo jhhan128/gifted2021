@@ -1,0 +1,52 @@
+/*
+ * lib/function
+ * Created by jhhan128.
+ *
+ *
+ * Declare of functions.
+ */
+
+#ifndef __FUNCTION__
+#define __FUNCTION__
+
+
+#include <cstdio>
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <utility>
+#include <fstream>
+#include <unordered_map>
+#include <vector>
+#include <algorithm>
+
+
+// first_exec
+void outputAll(const std::string &);
+void firstExec(void);
+
+
+// today
+void run(void);
+bool isInsideList(int);
+
+
+// hash
+void hash_init(void);
+void hash_add(const std::string &, const int);
+void hash_delete(const std::string &);
+int hash_find(const std::string &);
+
+
+// make_data
+void generateHash(void);
+
+
+// graphs
+void graph_makeGraph(void);
+void graph_addEdge(int, int);
+void graph_dfs(int);
+std::vector<int> graph_topologicalSort(void);
+
+
+#endif
